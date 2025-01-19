@@ -1,1 +1,3 @@
-.kube
+*.kube
+*.pem
+cilium-ca-certificate.yaml
