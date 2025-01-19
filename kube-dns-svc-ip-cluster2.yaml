@@ -1,3 +1,0 @@
-spec:
-  type: ClusterIP
-  loadBalancerIP: 172.18.0.201

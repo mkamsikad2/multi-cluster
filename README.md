@@ -79,24 +79,8 @@ kubectl apply -f cilium-ca-certificate.yaml --context kind-cluster2
 
 7. For each cluster expose the kube-dns service with a Loadbalancer
 ```
-cat <<EOF > kube-dns-svc-ip-cluster1.yaml
-spec:
-  type: ClusterIP
-  loadBalancerIP: 172.18.0.101
-EOF
-kubectl -n kube-system patch svc kube-dns --patch-file kube-dns-svc-ip-cluster1.yaml --context kind-cluster1
-
-cat <<EOF > kube-dns-svc-ip-cluster2.yaml
-spec:
-  type: ClusterIP
-  loadBalancerIP: 172.18.0.201
-EOF
-kubectl -n kube-system patch svc kube-dns --patch-file kube-dns-svc-ip-cluster2.yaml --context kind-cluster2
-
-
-kubectl  -n kube-system patch svc kube-dns --patch '{ "spec": { "type": "ClusterIP", "loadBalancerIP": "172.18.0.101" } }' --context kind-cluster1
-to do patch core dns service
-
+kubectl  -n kube-system patch svc kube-dns --patch '{ "spec": { "type": "LoadBalancer", "loadBalancerIP": "172.18.0.101" } }' --context kind-cluster1
+kubectl  -n kube-system patch svc kube-dns --patch '{ "spec": { "type": "LoadBalancer", "loadBalancerIP": "172.18.0.201" } }' --context kind-cluster2
 ```
 
 6. On both clusters, update coredns config to perform redirection for both clusters
