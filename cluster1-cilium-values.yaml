@@ -32,12 +32,14 @@ ipam:
   # operator:
   #   clusterPoolIPv4PodCIDRList: ["10.10.0.0/16"] #set the pod cidr must be unique #use this line for proxmox clusters
 hubble:
+  enabled: true
+  relay:
+    enabled: true
   tls:
     auto:
       enabled: true  
-        method: certmanager
-        certManagerIssuerRef:
-          group: cert-manager.io
-          kind: Issuer
-          name: cilium-issuer 
-
+      method: certmanager
+      certManagerIssuerRef:
+        group: cert-manager.io
+        kind: Issuer
+        name: cilium-issuer 

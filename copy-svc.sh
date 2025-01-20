@@ -1,8 +1,9 @@
 
-CLUSTER1=mk1-uk-busi-cl
-CLUSTER2=mk2-uk-busi-cl
-CLUSTER3=mk3-uk-busi-cl
+CLUSTER1=cluster1
+CLUSTER2=cluster3
+CLUSTER3=cluster3
 NAMESPACE=$NAMESPACE
+
 echo annoate services
 kubectl -n $NAMESPACE get svc -o name | xargs -I{} sh -c 'kubectl -n $NAMESPACE annotate {} service.cilium.io/global=true --overwrite'
 kubectl -n $NAMESPACE get svc -o name | xargs -I{} sh -c 'kubectl -n $NAMESPACE annotate {} service.cilium.io/shared=true --overwrite'	

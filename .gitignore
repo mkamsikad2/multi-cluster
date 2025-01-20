@@ -1,3 +1,4 @@
 *.kube
+cluster1.kube
 *.pem
 cilium-ca-certificate.yaml
