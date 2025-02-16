@@ -1,0 +1,46 @@
+# Not that the docker_gwbridge network is 172.18. 0.0/16 and our nodes will appear on this range. The Loadbalancer IP's must also be on this range
+cluster:
+  name: cluster2  #change as required
+  id: 2           #change as required
+clustermesh:
+  useAPIServer: true
+  config:
+    enabled: true
+    clusters:      #change as required
+    - name: cluster1
+      port: 2379
+      ips:
+      - 172.18.0.100
+    - name: cluster2
+      port: 2379
+      ips:
+      - 172.18.0.200
+  apiserver:
+    tls:
+      auto:
+        enabled: true
+        method: certmanager
+        certManagerIssuerRef:
+          group: cert-manager.io
+          kind: Issuer
+          name: cilium-issuer  
+    service:
+      type: LoadBalancer
+      loadBalancerIP: 172.18.0.200
+ipam:
+  mode: kubernetes   #use this line for kind clusters
+  # operator:
+  #   clusterPoolIPv4PodCIDRList: ["10.10.0.0/16"] #set the pod cidr must be unique #use this line for proxmox clusters
+hubble:
+  enabled: true
+  relay:
+    enabled: true
+  tls:
+    auto:
+      enabled: true  
+      method: certmanager
+      certManagerIssuerRef:
+        group: cert-manager.io
+        kind: Issuer
+        name: cilium-issuer 
+
