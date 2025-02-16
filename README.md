@@ -186,7 +186,7 @@ kubectl create -f https://raw.githubusercontent.com/cilium/cilium/1.16.5/example
 kubectl apply -f https://k8s.io/examples/admin/dns/dnsutils.yaml --context kind-cluster2
 ```
 
-13. Test  - to cpomplete
+13. Test connectivity
 kubectl get po,svc
 kubectl --context kind-cluster1 exec -it dnsutils -- nslookup kubernetes.default
 kubectl --context kind-cluster2 exec -it dnsutils -- nslookup kubernetes.default
@@ -198,15 +198,6 @@ kubectl --context kind-cluster1 exec -it dnsutils -- nslookup deathstar.default.
 kubectl --context kind-cluster2 exec -it dnsutils -- nslookup deathstar.default.svc.cluster2.local
 
 
-
-kubectl --context kind-cluster1 exec tiefighter -- curl -s -XPOST deathstar.default.svc.cluster1.local/v1/request-landing
-kubectl --context kind-cluster2 exec tiefighter -- curl -s -XPOST deathstar.default.svc.cluster1.local/v1/request-landing
-kubectl --context kind-cluster1 exec xwing -- curl -s -XPOST deathstar.default.svc.cluster1.local/v1/request-landing
-kubectl --context kind-cluster2 exec xwing -- curl -s -XPOST deathstar.default.svc.cluster1.local/v1/request-landing
-
-
-
 14. To delete both clusters run
 kind delete cluster -n cluster1
 kind delete cluster -n cluster2
-
